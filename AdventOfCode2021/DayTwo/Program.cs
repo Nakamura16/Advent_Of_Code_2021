@@ -1,4 +1,5 @@
-﻿using FileReader.Application;
+﻿using DayTwo;
+using FileReader.Application;
 
 internal class Program
 {
@@ -14,27 +15,10 @@ internal class Program
             var direction = instructionWords[0];
             var steps = int.Parse(instructionWords[1]);
             return (direction, steps);
-        });
+        }).ToList();
 
-        var horizontalPosition = 0;
-        var depthPosition = 0;
+        var partOneSolution = new PartOne().Calculate(instructions);
 
-        foreach (var instruction in instructions)
-        {
-            switch (instruction.direction)
-            {
-                case "forward":
-                    horizontalPosition += instruction.steps; 
-                    break;
-                case "down":
-                    depthPosition += instruction.steps;
-                    break;
-                case "up":
-                    depthPosition -= instruction.steps;
-                    break;
-            }
-        }
-
-        Console.WriteLine($"Solution for Day Two: {horizontalPosition * depthPosition}");
+        Console.WriteLine($"Solution for Day Two: {partOneSolution}");
     }
 }
