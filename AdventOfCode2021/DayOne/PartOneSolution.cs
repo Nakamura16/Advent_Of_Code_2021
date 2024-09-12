@@ -2,7 +2,7 @@
 
 internal class PartOneSolution
 {
-    public int Run(IList<int> depthMeasurements)
+    public int Run(IReadOnlyList<int> depthMeasurements)
     {
         var previousMeasurement = depthMeasurements.First();
         int biggerMeasurements = 0;
