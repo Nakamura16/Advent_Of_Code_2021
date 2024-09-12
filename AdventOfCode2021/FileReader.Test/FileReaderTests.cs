@@ -1,12 +1,12 @@
-﻿using FluentAssertions;
-using System.Reflection.Metadata;
+﻿using FileReader.Application;
+using FluentAssertions;
 using Xunit;
 
 namespace FileReader.Test;
 
 public class FileReaderTests
 {
-    private readonly FileReader reader = new FileReader();
+    private readonly FileReaderTool reader = new FileReaderTool();
 
     [Fact]
     public void ReadFile_WithExistingFullFilledTextFile_ShouldReadLineByLineCorrectly()
