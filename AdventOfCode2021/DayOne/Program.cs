@@ -38,6 +38,7 @@
 //increases from the previous measurement. (There is no measurement before the first measurement.)
 //In the example above, the changes are as follows:
 
+using DayOne;
 using FileReader.Application;
 
 internal class Program
@@ -53,18 +54,8 @@ internal class Program
             .Select(m => int.Parse(m))
             .ToList();
 
-        var previousMeasurement = depthMeasurements.First();
-        int biggerMeasurements = 0;
+        var solutionForDayOne = new PartOneSolution().Run(depthMeasurements);
 
-        foreach (var measurement in depthMeasurements)
-        {
-            if (measurement > previousMeasurement)
-            {
-                biggerMeasurements ++;
-            }
-            previousMeasurement = measurement;
-        }
-
-        Console.WriteLine(biggerMeasurements);
+        Console.WriteLine($"Solution for Part One: {solutionForDayOne}");
     }
 }
