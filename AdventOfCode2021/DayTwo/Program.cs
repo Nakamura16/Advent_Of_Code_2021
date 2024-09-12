@@ -17,8 +17,28 @@ internal class Program
             return (direction, steps);
         }).ToList();
 
-        var partOneSolution = new PartOne().Calculate(instructions);
+        var horizontalPosition = 0;
+        var depthPosition = 0;
+        var aim = 0;
+        foreach (var (direction, units) in instructions)
+        {
+            switch (direction)
+            {
+                case "forward":
+                    horizontalPosition += units;
+                    depthPosition += aim * units;
+                    break;
+                case "down":
+                    aim += units;
+                    break;
+                case "up":
+                    aim -= units;
+                    break;
+            }
+        }
+        Console.WriteLine($"Solution for Day Two: {horizontalPosition * depthPosition}");
 
-        Console.WriteLine($"Solution for Day Two: {partOneSolution}");
+        //var partOneSolution = new PartOne().Calculate(instructions);
+        //Console.WriteLine($"Solution for Day Two: {partOneSolution}");
     }
 }
