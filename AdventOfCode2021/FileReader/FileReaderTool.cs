@@ -1,6 +1,6 @@
-﻿namespace FileReader;
+﻿namespace FileReader.Application;
 
-public class FileReader
+public class FileReaderTool
 {
     public IReadOnlyList<string> ReadFile(string filePath)
     {
