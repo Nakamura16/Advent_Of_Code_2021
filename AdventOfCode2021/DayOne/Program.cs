@@ -54,8 +54,24 @@ internal class Program
             .Select(m => int.Parse(m))
             .ToList();
 
-        var solutionForDayOne = new PartOneSolution().Run(depthMeasurements);
+        var transformedMeasurements = TranformMeasurements(depthMeasurements);
 
-        Console.WriteLine($"Solution for Part One: {solutionForDayOne}");
+        var solutionForPartOne = new PartOneSolution().Run(depthMeasurements);
+        var solutionForPartTwo = new PartOneSolution().Run(transformedMeasurements);
+
+        Console.WriteLine($"Solution for Part One: {solutionForPartOne}");
+        Console.WriteLine($"Solution for Part Two: {solutionForPartTwo}");
+    }
+
+    private static List<int> TranformMeasurements(IList<int> measurements)
+    {
+        var tranformMeasurements = new List<int>();
+
+        for (int i = 0; i < (measurements.Count - 2); i++)
+        {
+            tranformMeasurements.Add(measurements[i] + measurements[i + 1] + +measurements[i + 2]);
+        }
+
+        return tranformMeasurements;
     }
 }
