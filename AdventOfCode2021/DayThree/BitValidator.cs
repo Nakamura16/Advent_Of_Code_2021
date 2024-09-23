@@ -1,9 +1,9 @@
 ﻿namespace DayThree;
 
-class BitValidator
+public class BitValidator
 {
-    private int NumbersZeroQuantity { get; set; }
-    private int NumbersOnesQuantity { get; set; }
+    public int NumbersZeroQuantity { get; set; }
+    public int NumbersOnesQuantity { get; set; }
 
     public void ValidateNumber(double currentBit)
     {
@@ -24,10 +24,17 @@ class BitValidator
             ResetNumbers();
             return "0";
         }
-        else
+        else if (NumbersOnesQuantity > NumbersZeroQuantity)
         {
             ResetNumbers();
             return "1";
+        }
+        else 
+        {
+            throw new ArgumentException(
+                $"The {nameof(NumbersOnesQuantity)} and {nameof(NumbersZeroQuantity)} are the same: "
+                + $"\n\nNumbersOnesQuantity:{NumbersOnesQuantity} "
+                + $"\nNumbersZeroQuantity:{NumbersZeroQuantity}");
         }
     }
 
