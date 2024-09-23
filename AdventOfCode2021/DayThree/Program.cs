@@ -1,4 +1,5 @@
-﻿using FileReader.Application;
+﻿using DayThree;
+using FileReader.Application;
 
 internal class Program
 {
@@ -13,43 +14,28 @@ internal class Program
         var lineSize = bytes.First().Length;
         var currentBitColumn = 0;
 
-        var numbersZeroQuantity = 0;
-        var numbersOnesQuantity = 0;
+        var bitValidator = new BitValidator();
 
-        var bit = string.Empty;
+        var bitResult = string.Empty;
 
         do
         {
             foreach (var item in bytes)
             {
                 var currentBit = char.GetNumericValue(item[currentBitColumn]);
+                var debug = bytes.IndexOf(item) == bytes.Count;
 
-                if (currentBit == 0)
+                if (bytes.IndexOf(item) == bytes.Count)
                 {
-                    numbersZeroQuantity++;
+                    bitValidator.ValidateNumber(currentBit);
+                    bitResult += bitValidator.ValidateQuantityOfNumbers();
+                    currentBitColumn++;
                 }
-                else if (currentBit == 1)
-                {
-                    numbersOnesQuantity++;
-                }
-                else if(bytes.IndexOf(item) == bytes.Count)
-                {
-                    if (numbersZeroQuantity > numbersOnesQuantity)
-                    {
-                        bit += "0";
-                    }
-                    else 
-                    {
-                        bit += "1";
-                    }
-                    numbersZeroQuantity = 0;
-                    numbersOnesQuantity = 0;
-                    currentBitColumn ++;
-                }
+                bitValidator.ValidateNumber(currentBit);
             }
         } while (currentBitColumn <= lineSize);
 
-        Console.WriteLine($"Solution for Part One: {bit}");
+        Console.WriteLine($"Solution for Part One: {bitResult}");
 
     }
 }
