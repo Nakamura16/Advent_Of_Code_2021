@@ -30,12 +30,12 @@ public class PartOne
 
                 if (bytes.IndexOf(bytes[currentLine]) + 1 == bytes.Count)
                 {
-                    bitValidator.ValidateNumber(currentBit);
+                    bitValidator.CheckNumber(currentBit);
                     bitResult += bitValidator.ValidateQuantityOfNumbers();
                     currentColumn++;
                     break;
                 }
-                bitValidator.ValidateNumber(currentBit);
+                bitValidator.CheckNumber(currentBit);
             }
         } while (currentColumn < totalColumns);
         return bitResult;

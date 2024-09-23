@@ -2,29 +2,29 @@
 
 public class BitValidator
 {
-    public int NumbersZeroQuantity { get; set; }
-    public int NumbersOnesQuantity { get; set; }
+    public int ZerosQuantity { get; set; }
+    public int OnesQuantity { get; set; }
 
-    public void ValidateNumber(double currentBit)
+    public void CheckNumber(double currentBit)
     {
         if (currentBit == 0)
         {
-            NumbersZeroQuantity++;
+            ZerosQuantity ++;
         }
         else if (currentBit == 1)
         {
-            NumbersOnesQuantity++;
+            OnesQuantity ++;
         }
     }
 
     public string ValidateQuantityOfNumbers()
     {
-        if (NumbersZeroQuantity > NumbersOnesQuantity)
+        if (ZerosQuantity > OnesQuantity)
         {
             ResetNumbers();
             return "0";
         }
-        else if (NumbersOnesQuantity > NumbersZeroQuantity)
+        else if (OnesQuantity > ZerosQuantity)
         {
             ResetNumbers();
             return "1";
@@ -32,15 +32,15 @@ public class BitValidator
         else 
         {
             throw new ArgumentException(
-                $"The {nameof(NumbersOnesQuantity)} and {nameof(NumbersZeroQuantity)} are the same: "
-                + $"\n\nNumbersOnesQuantity:{NumbersOnesQuantity} "
-                + $"\nNumbersZeroQuantity:{NumbersZeroQuantity}");
+                $"The {nameof(OnesQuantity)} and {nameof(ZerosQuantity)} are the same: "
+                + $"\n\nNumbersOnesQuantity:{OnesQuantity} "
+                + $"\nNumbersZeroQuantity:{ZerosQuantity}");
         }
     }
 
     private void ResetNumbers()
     {
-        NumbersZeroQuantity = 0;
-        NumbersOnesQuantity = 0;
+        ZerosQuantity = 0;
+        OnesQuantity = 0;
     }
 }

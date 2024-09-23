@@ -1,65 +1,49 @@
 ﻿using FluentAssertions;
-using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace DayThree.Test;
 
 public class PartOneTests
 {
+    private const string expectedGammaRate = "001101011100";
+    private const string expectedEpsilonRate = "110010100011";
+
     private readonly PartOne partOne = new();
+    private readonly List<string> testData = new()
+    {
+        "100101001000",
+        "011101110101",
+        "000001010101",
+        "001001010001",
+        "001101011110",
+        "010101001100",
+        "101100110101",
+        "101010111110",
+        "001100001000",
+    };
 
     [Fact]
     public void Execute_ShouldReturnCorrectByteResult()
     {
-        var testData = new List<string>()
-        {
-            "100101001000",
-            "011101110101",
-            "000001010101",
-            "001001010001",
-            "001101011110",
-            "010101001100",
-            "101100110101",
-            "101010111110",
-            "001100001000",
-        };
-
         var result = partOne.Execute(testData);
 
-        var expectedResult = "001101011100";
+        var expectedResult = 2782100;
         result.Should().Be(expectedResult);
     }
 
     [Fact]
     public void GetGammaRate_ShouldReturnCorrectByteResult()
     {
-        var testData = new List<string>()
-        {
-            "100101001000",
-            "011101110101",
-            "000001010101",
-            "001001010001",
-            "001101011110",
-            "010101001100",
-            "101100110101",
-            "101010111110",
-            "001100001000",
-        };
-
         var result = partOne.GetGammaRate(testData);
-
-        var expectedResult = "001101011100";
-        result.Should().Be(expectedResult);
+        
+        result.Should().Be(expectedGammaRate);
     }
 
     [Fact]
     public void GetEpsilonRate_ConvertToEpsilonRateCorrectly()
     {
-        var gammaRate = "001101011100";
-        var expectedResult = "110010100011";
+        var result = partOne.GetEpsilonRate(expectedGammaRate);
 
-        var result = partOne.GetEpsilonRate(gammaRate);
-
-        result.Should().Be(expectedResult);
+        result.Should().Be(expectedEpsilonRate);
     }
 }
