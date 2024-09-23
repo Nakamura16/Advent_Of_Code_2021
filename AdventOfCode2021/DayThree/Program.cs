@@ -11,8 +11,8 @@ internal class Program
             + "Advent_Of_Code_2021\\AdventOfCode2021\\DayThree\\Input.txt";
 
         var bytes = reader.ReadFile(filePath).ToList();
-        var lineSize = bytes.First().Length;
-        var currentBitColumn = 0;
+        var totalColumns = bytes.First().Length;
+        var currentColumn = 0;
 
         var bitValidator = new BitValidator();
 
@@ -22,17 +22,17 @@ internal class Program
         {
             foreach (var item in bytes)
             {
-                var currentBit = char.GetNumericValue(item[currentBitColumn]);
+                var currentBit = char.GetNumericValue(item[currentColumn]);
 
                 if (bytes.IndexOf(item) == bytes.Count)
                 {
                     bitValidator.ValidateNumber(currentBit);
                     bitResult += bitValidator.ValidateQuantityOfNumbers();
-                    currentBitColumn++;
+                    currentColumn++;
                 }
                 bitValidator.ValidateNumber(currentBit);
             }
-        } while (currentBitColumn <= lineSize);
+        } while (currentColumn <= totalColumns);
 
         Console.WriteLine($"Solution for Part One: {bitResult}");
     }
