@@ -23,7 +23,6 @@ internal class Program
             foreach (var item in bytes)
             {
                 var currentBit = char.GetNumericValue(item[currentBitColumn]);
-                var debug = bytes.IndexOf(item) == bytes.Count;
 
                 if (bytes.IndexOf(item) == bytes.Count)
                 {
@@ -36,6 +35,5 @@ internal class Program
         } while (currentBitColumn <= lineSize);
 
         Console.WriteLine($"Solution for Part One: {bitResult}");
-
     }
 }
