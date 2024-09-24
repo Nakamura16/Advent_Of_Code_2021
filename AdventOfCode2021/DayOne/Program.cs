@@ -1,5 +1,6 @@
-﻿using DayOne;
-using FileReader.Application;
+﻿using FileReader.Application;
+
+namespace DayOne;
 
 internal class Program
 {
