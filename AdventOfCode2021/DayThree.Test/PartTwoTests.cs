@@ -31,9 +31,17 @@ public class PartTwoTests
     }
 
     [Fact]
+    public void GetCO2ScrubberRating_ShouldReturnTheMostCommonValue()
+    {
+        var result = partTwo.GetCO2ScrubberRating(testData);
+
+        result.Should().Be("01010");
+    }
+
+    [Fact]
     public void RemoveNumbers_ShouldRemoveTheCorrectNumbers()
     {
-        var result = partTwo.RemoveNumbers(bytes: testData, column: 2, mostCommonBit: "1");
+        var result = partTwo.RemoveBits(bytes: testData, column: 2, bitToNotRemove: "1");
 
         var expectedResult = new List<string>()
         {

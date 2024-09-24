@@ -11,7 +11,9 @@ internal class Program
         var bytes = new FileReaderTool().ReadFile(filePath).ToList();
 
         var partOneResult = new PartOne().Execute(bytes);
-        
         Console.WriteLine($"Solution for Part One: {partOneResult}");
+
+        var partTwoResult = new PartTwo().Execute(bytes);
+        Console.WriteLine($"Solution for Part Two: {partTwoResult}");
     }
 }
