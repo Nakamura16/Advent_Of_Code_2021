@@ -27,8 +27,9 @@ public class PartOne
             for (int currentLine = 0; currentLine < bytes.Count; currentLine++)
             {
                 var currentBit = char.GetNumericValue(bytes[currentLine][currentColumn]);
+                var isTheLastNumberOfTheColumn = bytes.IndexOf(bytes[currentLine]) + 1 == bytes.Count;
 
-                if (bytes.IndexOf(bytes[currentLine]) + 1 == bytes.Count)
+                if (isTheLastNumberOfTheColumn)
                 {
                     bitValidator.CheckNumber(currentBit);
                     bitResult += bitValidator.ValidateQuantityOfNumbers();
