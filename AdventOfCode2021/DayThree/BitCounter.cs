@@ -1,11 +1,11 @@
 ﻿namespace DayThree;
 
-public class BitValidator
+public class BitCounter
 {
     public int ZerosQuantity { get; set; }
     public int OnesQuantity { get; set; }
 
-    public void CheckNumber(double currentBit)
+    public void CountBit(double currentBit)
     {
         if (currentBit == 0)
         {
@@ -17,7 +17,7 @@ public class BitValidator
         }
     }
 
-    public string ValidateQuantityOfNumbers()
+    public string GetBitValue()
     {
         if (ZerosQuantity > OnesQuantity)
         {

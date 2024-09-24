@@ -18,28 +18,29 @@ public class PartOne
         var totalColumns = bytes.First().Length;
         var currentColumn = 0;
 
-        var bitValidator = new BitValidator();
+        var bitCounter = new BitCounter();
 
-        var bitResult = string.Empty;
+        var result = string.Empty;
 
         do
         {
             for (int currentLine = 0; currentLine < bytes.Count; currentLine++)
             {
                 var currentBit = char.GetNumericValue(bytes[currentLine][currentColumn]);
-                var isTheLastNumberOfTheColumn = bytes.IndexOf(bytes[currentLine]) + 1 == bytes.Count;
+                var isTheLastBitOfTheColumn = bytes.IndexOf(bytes[currentLine]) + 1 == bytes.Count;
 
-                if (isTheLastNumberOfTheColumn)
+                if (isTheLastBitOfTheColumn)
                 {
-                    bitValidator.CheckNumber(currentBit);
-                    bitResult += bitValidator.ValidateQuantityOfNumbers();
+                    bitCounter.CountBit(currentBit);
+                    result += bitCounter.GetBitValue();
                     currentColumn++;
                     break;
                 }
-                bitValidator.CheckNumber(currentBit);
+                bitCounter.CountBit(currentBit);
             }
         } while (currentColumn < totalColumns);
-        return bitResult;
+
+        return result;
     }
 
     public string GetEpsilonRate(string gammaRate)

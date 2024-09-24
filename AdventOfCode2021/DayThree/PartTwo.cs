@@ -15,7 +15,7 @@ public class PartTwo
     public string GetOxygenGeneratorRating(List<string> bytes)
     {
         var bits = new List<string>(bytes);
-        var bitValidator = new BitValidator();
+        var bitValidator = new BitCounter();
 
         var currentColumn = 0;
 
@@ -28,12 +28,12 @@ public class PartTwo
 
                 if (isTheLastNumberOfTheColumn)
                 {
-                    bitValidator.CheckNumber(currentBit);
-                    bits = RemoveBits(bits, currentColumn, bitValidator.ValidateQuantityOfNumbers());
+                    bitValidator.CountBit(currentBit);
+                    bits = RemoveBits(bits, currentColumn, bitValidator.GetBitValue());
                     currentColumn++;
                     break;
                 }
-                bitValidator.CheckNumber(currentBit);
+                bitValidator.CountBit(currentBit);
             }
         } while (bits.Count != 1);
 
@@ -43,7 +43,7 @@ public class PartTwo
     public string GetCO2ScrubberRating(List<string> bytes)
     {
         var bits = new List<string>(bytes);
-        var bitValidator = new BitValidator();
+        var bitValidator = new BitCounter();
         var partOne = new PartOne();
 
         var currentColumn = 0;
@@ -57,13 +57,13 @@ public class PartTwo
 
                 if (isTheLastNumberOfTheColumn)
                 {
-                    bitValidator.CheckNumber(currentBit);
-                    var reverseBit = partOne.GetEpsilonRate(bitValidator.ValidateQuantityOfNumbers());
+                    bitValidator.CountBit(currentBit);
+                    var reverseBit = partOne.GetEpsilonRate(bitValidator.GetBitValue());
                     bits = RemoveBits(bits, currentColumn, reverseBit);
                     currentColumn++;
                     break;
                 }
-                bitValidator.CheckNumber(currentBit);
+                bitValidator.CountBit(currentBit);
             }
         } while (bits.Count != 1);
 

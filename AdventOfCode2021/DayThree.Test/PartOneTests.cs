@@ -46,4 +46,13 @@ public class PartOneTests
 
         result.Should().Be(expectedEpsilonRate);
     }
+
+    [Fact]
+    public void GetEpsilonRate_WithInvalidBit_ShouldThrowException()
+    {
+        var result = partOne.Invoking(p => p.GetEpsilonRate("2"))
+            .Should()
+            .ThrowExactly<ArgumentException>()
+            .WithMessage("Cannot Convert Epsilon Rate.");
+    }
 }

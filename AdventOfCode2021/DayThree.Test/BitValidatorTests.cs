@@ -8,7 +8,7 @@ namespace DayThree.Test;
 public class BitValidatorTests
 {
     private readonly Fixture fixture = new();
-    private readonly BitValidator bitValidator = new();
+    private readonly BitCounter bitValidator = new();
 
     [Theory]
     [InlineData(10, 5, "1")]
@@ -22,7 +22,7 @@ public class BitValidatorTests
         bitValidator.OnesQuantity = NumbersOnesQuantity;
         bitValidator.ZerosQuantity= NumbersZeroQuantity;
 
-        var result = bitValidator.ValidateQuantityOfNumbers();
+        var result = bitValidator.GetBitValue();
 
         result.Should().Be(expectedResult);
         bitValidator.OnesQuantity.Should().Be(0);
