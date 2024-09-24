@@ -1,6 +1,6 @@
 ﻿namespace DayTwo;
 
-internal class PartOne
+public class PartOne
 {
     public int Calculate(IReadOnlyList<(string direction,int steps)> instructions)
     {
