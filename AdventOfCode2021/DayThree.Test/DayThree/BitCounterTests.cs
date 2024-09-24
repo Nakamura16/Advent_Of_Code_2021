@@ -1,7 +1,8 @@
 ﻿using Xunit;
 using FluentAssertions;
+using DayThree;
 
-namespace DayThree.Test;
+namespace Solutions.Test.DayThree;
 
 public class BitCounterTests
 {
@@ -17,7 +18,7 @@ public class BitCounterTests
         string expectedResult)
     {
         bitCounter.OnesQuantity = NumbersOnesQuantity;
-        bitCounter.ZerosQuantity= NumbersZeroQuantity;
+        bitCounter.ZerosQuantity = NumbersZeroQuantity;
 
         var result = bitCounter.GetMostCommonBit();
 

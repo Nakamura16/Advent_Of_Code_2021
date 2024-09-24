@@ -1,7 +1,8 @@
-﻿using FluentAssertions;
+﻿using DayThree;
+using FluentAssertions;
 using Xunit;
 
-namespace DayThree.Test;
+namespace Solutions.Test.DayThree;
 
 public class PartOneTests
 {
@@ -35,7 +36,7 @@ public class PartOneTests
     public void GetGammaRate_ShouldReturnCorrectByteResult()
     {
         var result = partOne.GetGammaRate(testData);
-        
+
         result.Should().Be(expectedGammaRate);
     }
 

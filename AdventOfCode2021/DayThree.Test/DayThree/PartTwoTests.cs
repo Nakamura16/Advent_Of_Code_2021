@@ -1,7 +1,8 @@
-﻿using FluentAssertions;
+﻿using DayThree;
+using FluentAssertions;
 using Xunit;
 
-namespace DayThree.Test;
+namespace Solutions.Test.DayThree;
 
 public class PartTwoTests
 {
