@@ -17,7 +17,7 @@ public class BitCounter
         }
     }
 
-    public string GetBitValue()
+    public string GetMostCommonBit()
     {
         if (ZerosQuantity > OnesQuantity)
         {

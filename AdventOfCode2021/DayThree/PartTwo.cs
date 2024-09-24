@@ -29,7 +29,7 @@ public class PartTwo
                 if (isTheLastNumberOfTheColumn)
                 {
                     bitValidator.CountBit(currentBit);
-                    bits = RemoveBits(bits, currentColumn, bitValidator.GetBitValue());
+                    bits = RemoveBits(bits, currentColumn, bitValidator.GetMostCommonBit());
                     currentColumn++;
                     break;
                 }
@@ -58,7 +58,7 @@ public class PartTwo
                 if (isTheLastNumberOfTheColumn)
                 {
                     bitValidator.CountBit(currentBit);
-                    var reverseBit = partOne.GetEpsilonRate(bitValidator.GetBitValue());
+                    var reverseBit = partOne.GetEpsilonRate(bitValidator.GetMostCommonBit());
                     bits = RemoveBits(bits, currentColumn, reverseBit);
                     currentColumn++;
                     break;

@@ -32,7 +32,7 @@ public class PartOne
                 if (isTheLastBitOfTheColumn)
                 {
                     bitCounter.CountBit(currentBit);
-                    result += bitCounter.GetBitValue();
+                    result += bitCounter.GetMostCommonBit();
                     currentColumn++;
                     break;
                 }
