@@ -41,7 +41,7 @@ public class PartTwoTests
     [Fact]
     public void RemoveNumbers_ShouldRemoveTheCorrectNumbers()
     {
-        var result = partTwo.RemoveBits(bytes: testData, column: 2, bitToNotRemove: "1");
+        var result = partTwo.RemoveBits(bytes: testData, column: 2, bitToNotRemove: "0");
 
         var expectedResult = new List<string>()
         {
