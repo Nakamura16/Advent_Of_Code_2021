@@ -31,10 +31,8 @@ public class BitValidator
         }
         else 
         {
-            throw new ArgumentException(
-                $"The {nameof(OnesQuantity)} and {nameof(ZerosQuantity)} are the same: "
-                + $"\n\nNumbersOnesQuantity:{OnesQuantity} "
-                + $"\nNumbersZeroQuantity:{ZerosQuantity}");
+            ResetNumbers();
+            return "1";
         }
     }
 

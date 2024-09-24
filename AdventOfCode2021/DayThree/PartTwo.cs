@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DayThree;
+﻿namespace DayThree;
 
 public class PartTwo
 {
     public string GetOxygenGeneratorRating(List<string> bytes)
     {
         var bits = new List<string>(bytes);
-        var totalColumns = bits.First().Length;
-        var bitResult = string.Empty;
-
         var bitValidator = new BitValidator();
 
         var currentColumn = 0;
@@ -28,19 +19,20 @@ public class PartTwo
                 if (isTheLastNumberOfTheColumn)
                 {
                     bitValidator.CheckNumber(currentBit);
-                    bitResult += bitValidator.ValidateQuantityOfNumbers();
+                    bits = RemoveNumbers(bits, currentColumn, bitValidator.ValidateQuantityOfNumbers());
                     currentColumn++;
                     break;
                 }
                 bitValidator.CheckNumber(currentBit);
             }
-        } while (currentColumn < totalColumns);
-        return bitResult;
+        } while (bits.Count != 1);
+
+        return bits.Single();
     }
 
-    public List<string> RemoveNumbers(List<string> bytes, int column, string bitToRemove)
+    public List<string> RemoveNumbers(List<string> bytes, int column, string mostCommonBit)
     {
-        var filteredNumbers = bytes.Where(bit => bit[column - 1].ToString() == bitToRemove);
+        var filteredNumbers = bytes.Where(bit => bit[column].ToString() != mostCommonBit);
         return bytes.Except(filteredNumbers).ToList();
     }
 }
