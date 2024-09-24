@@ -1,6 +1,6 @@
 ﻿namespace DayOne;
 
-internal class PartTwoSolution
+public class PartTwoSolution
 {
     public IReadOnlyList<int> TranformMeasurements(IReadOnlyList<int> measurements)
     {
