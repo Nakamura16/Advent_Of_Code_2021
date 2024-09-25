@@ -1,5 +1,4 @@
 ﻿using FileReader.Application;
-using System.Collections.Generic;
 
 namespace DayFour;
 
@@ -17,10 +16,5 @@ internal class Program
 
         file.RemoveAt(0);
         var bingoCards = bingoFormatter.FormatBingoCards(file);
-
-        foreach ( var number in bingoNumbers )
-        {
-
-        }
     }
 }

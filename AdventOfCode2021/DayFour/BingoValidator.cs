@@ -1,26 +1,50 @@
-﻿namespace DayFour;
+﻿using System.Data.Common;
+
+namespace DayFour;
 
 public class BingoValidator
 {
     private const int bingoCardSize = 5;
 
-    public void VerifyBingoCards(int number, List<BingoCard> cards)
+    public BingoCard? VerifyBingoCards(int number, List<BingoCard> cards)
     {
-        foreach (var bingoCard in cards)
+        var isWinnerCard = false;
+        BingoCard winnercard = default;
+        do 
         {
-            for (int line = 0; line < bingoCard.numbers.Count; line++)
+            foreach (var card in cards)
             {
-                for (int column = 0; column < bingoCard.numbers[line].Count; column++)
+                if (IsWinnerCard(number, card))
                 {
-                    if (bingoCard.numbers[line][column].Value == number)
-                    {
-                        bingoCard.numbers[line][column].IsChecked = true;
-                        VerifyLine(bingoCard.numbers[line]);
-                        VerifyColumn(bingoCard.numbers, column);
-                    }
+                    winnercard = card;
+                };
+            }
+        } while (!isWinnerCard);
+        return winnercard;
+    }
+
+    public bool IsWinnerCard(int number, BingoCard card)
+    {
+        var bingoCard = card.numbers;
+        for (int line = 0; line < bingoCard.Count; line++)
+        {
+            for (int column = 0; column < bingoCard[line].Count; column++)
+            {
+                if (bingoCard[line][column].Value == number)
+                {
+                    bingoCard[line][column].IsChecked = true;
+                    return IsWinner(card, line, column);
                 }
             }
         }
+        return false;
+    }
+
+    public bool IsWinner(BingoCard card, int lastCheckedNumberLine, int lastCheckedNumberColumn)
+    {
+        var bingoCard = card.numbers;
+        return VerifyLine(bingoCard[lastCheckedNumberLine]) 
+            || VerifyColumn(bingoCard, lastCheckedNumberColumn);
     }
 
     public bool VerifyLine(List<Number> line)
