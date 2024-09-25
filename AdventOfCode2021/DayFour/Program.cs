@@ -12,7 +12,10 @@ internal class Program
             + "AdventOfCode2021\\DayFour\\Input.txt";
 
         var file = fileReader.ReadFile(filePath).ToList();
-        var bingoNumbers = file.Single(line => line.Length > 5);
+        var bingoNumbers = new Stack<int>(
+            file.Single(line => line.Length > 5)
+            .Split(",")
+            .Select(number => int.Parse(number)));
 
         file.RemoveAt(0);
         var bingoCards = bingoFormatter.FormatBingoCards(file);
