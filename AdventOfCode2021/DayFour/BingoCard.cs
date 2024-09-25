@@ -1,6 +1,7 @@
 ﻿namespace DayFour;
 
-public record BingoCard(List<List<Number>> numbers);
+public record BingoCard(List<List<Number>> Numbers);
+
 public class Number
 {
     public int Value { get; set; }

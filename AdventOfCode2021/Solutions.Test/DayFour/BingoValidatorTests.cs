@@ -161,7 +161,7 @@ public class BingoValidatorTests
         var result = validator.IsWinnerCard(3, bingoCard);
 
         result.Should().BeTrue();
-        bingoCard.numbers[2].Should().ContainSingle(number => number.Value == 3).Which.IsChecked.Should().BeTrue();
+        bingoCard.Numbers[2].Should().ContainSingle(number => number.Value == 3).Which.IsChecked.Should().BeTrue();
     }
 
     [Fact]
@@ -175,7 +175,7 @@ public class BingoValidatorTests
         var result = validator.IsWinnerCard(3, bingoCard);
 
         result.Should().BeTrue();
-        bingoCard.numbers.Single().Should().ContainSingle(number => number.Value == 3).Which.IsChecked.Should().BeTrue();
+        bingoCard.Numbers.Single().Should().ContainSingle(number => number.Value == 3).Which.IsChecked.Should().BeTrue();
     }
 
     [Fact]
@@ -194,7 +194,7 @@ public class BingoValidatorTests
         var result = validator.IsWinnerCard(3, bingoCard);
 
         result.Should().BeFalse();
-        bingoCard.numbers[1].Should().ContainSingle(number => number.Value == 2).Which.IsChecked.Should().BeFalse();
-        bingoCard.numbers[2].Should().ContainSingle(number => number.Value == 3).Which.IsChecked.Should().BeTrue();
+        bingoCard.Numbers[1].Should().ContainSingle(number => number.Value == 2).Which.IsChecked.Should().BeFalse();
+        bingoCard.Numbers[2].Should().ContainSingle(number => number.Value == 3).Which.IsChecked.Should().BeTrue();
     }
 }

@@ -20,7 +20,7 @@ public class BingoService
     public List<int> GetUnmarkedNumbers(BingoCard card)
     {
         var unmarkedNumbers = new List<int>();
-        foreach(var line in card.numbers)
+        foreach(var line in card.Numbers)
         {
             foreach (var number in line)
             {

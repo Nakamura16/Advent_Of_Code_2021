@@ -6,7 +6,7 @@ public class BingoValidator
 
     public bool IsWinnerCard(int number, BingoCard card)
     {
-        var bingoCard = card.numbers;
+        var bingoCard = card.Numbers;
         for (int line = 0; line < bingoCard.Count; line++)
         {
             for (int column = 0; column < bingoCard[line].Count; column++)
@@ -23,7 +23,7 @@ public class BingoValidator
 
     public bool IsWinner(BingoCard card, int lastCheckedNumberLine, int lastCheckedNumberColumn)
     {
-        var bingoCard = card.numbers;
+        var bingoCard = card.Numbers;
         return VerifyLine(bingoCard[lastCheckedNumberLine]) 
             || VerifyColumn(bingoCard, lastCheckedNumberColumn);
     }

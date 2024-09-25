@@ -2,10 +2,12 @@
 
 public class BingoFormatter
 {
+    private const int BingoCardSize = 5;
+
     public List<BingoCard> FormatBingoCards(IList<string> inputFile)
     {
         var bingoCards = new List<BingoCard>();
-        var bingoCard = new List<List<Number>>();
+        var bingoCardNumbers = new List<List<Number>>();
         foreach (var line in inputFile)
         {
             if (!string.IsNullOrWhiteSpace(line))
@@ -14,12 +16,12 @@ public class BingoFormatter
                     .Where(number => !string.IsNullOrWhiteSpace(number))
                     .Select(number => new Number(int.Parse(number)))
                     .ToList();
-                bingoCard.Add(numbers);
+                bingoCardNumbers.Add(numbers);
             }
-            if(bingoCard.Count == 5)
+            if(bingoCardNumbers.Count == BingoCardSize)
             {
-                bingoCards.Add(new BingoCard(new(bingoCard)));
-                bingoCard.Clear();
+                bingoCards.Add(new BingoCard(new(bingoCardNumbers)));
+                bingoCardNumbers.Clear();
             }
         }
         return bingoCards;
