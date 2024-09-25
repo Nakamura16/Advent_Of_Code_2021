@@ -1,4 +1,6 @@
-﻿namespace DayFour;
+﻿using DayFour.Model;
+
+namespace DayFour.Validator;
 
 public class BingoValidator
 {
@@ -24,7 +26,7 @@ public class BingoValidator
     public bool IsWinner(BingoCard card, int lastCheckedNumberLine, int lastCheckedNumberColumn)
     {
         var cardNumbers = card.Numbers;
-        return VerifyLine(cardNumbers[lastCheckedNumberLine]) 
+        return VerifyLine(cardNumbers[lastCheckedNumberLine])
             || VerifyColumn(cardNumbers, lastCheckedNumberColumn);
     }
 

@@ -1,4 +1,5 @@
-﻿using FileReader.Application;
+﻿using DayFour.Solutions;
+using FileReader.Application;
 
 namespace DayFour;
 

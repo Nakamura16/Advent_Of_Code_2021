@@ -1,8 +1,11 @@
-﻿namespace DayFour;
+﻿using DayFour.Model;
+using DayFour.Validator;
+
+namespace DayFour.Application;
 
 public class BingoService
 {
-    public List<int> PlayedNumbers { get; set; } = new ();
+    public List<int> PlayedNumbers { get; set; } = new();
 
     public int GetDayFourPartOneSolution(BingoCard card)
     {
@@ -12,7 +15,7 @@ public class BingoService
     public List<int> GetUnmarkedNumbers(BingoCard card)
     {
         var unmarkedNumbers = new List<int>();
-        foreach(var line in card.Numbers)
+        foreach (var line in card.Numbers)
         {
             foreach (var number in line)
             {
@@ -53,7 +56,7 @@ public class BingoService
             break;
         } while (!isWinnerCard);
 
-        return winnercard is null 
+        return winnercard is null
             ? throw new InvalidDataException("There is no Winning Cards.")
             : winnercard;
     }

@@ -1,4 +1,5 @@
-﻿using DayFour;
+﻿using DayFour.Application;
+using DayFour.Model;
 using FluentAssertions;
 using Xunit;
 

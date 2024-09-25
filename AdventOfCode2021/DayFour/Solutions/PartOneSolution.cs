@@ -1,4 +1,6 @@
-﻿namespace DayFour;
+﻿using DayFour.Application;
+
+namespace DayFour.Solutions;
 
 public class PartOneSolution
 {

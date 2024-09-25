@@ -1,4 +1,4 @@
-﻿using DayFour;
+﻿using DayFour.Solutions;
 using FileReader.Application;
 using FluentAssertions;
 using Xunit;

@@ -1,4 +1,6 @@
-﻿namespace DayFour;
+﻿using DayFour.Model;
+
+namespace DayFour.Application;
 
 public class BingoFormatter
 {
@@ -20,7 +22,7 @@ public class BingoFormatter
                     .ToList();
                 bingoCardNumbers.Add(numbers);
             }
-            if(bingoCardNumbers.Count == BingoCardSize)
+            if (bingoCardNumbers.Count == BingoCardSize)
             {
                 bingoCards.Add(new BingoCard(new(bingoCardNumbers)));
                 bingoCardNumbers.Clear();
