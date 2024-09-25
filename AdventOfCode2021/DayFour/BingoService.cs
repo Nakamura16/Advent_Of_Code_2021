@@ -2,31 +2,33 @@
 
 public class BingoService
 {
-    public readonly List<int> playedNumbers = new();
+    public List<int> playedNumbers = new();
+
+    public int GetDayFourPartOneSolution(BingoCard card)
+    {
+        return GetSumOfUnmarkedNumbers(card) * playedNumbers.Last();
+    }
 
     public int GetSumOfUnmarkedNumbers(BingoCard card)
     {
         var unmarkedNumbers = GetUnmarkedNumbers(card);
-        int sum = default;
-        foreach (var line in unmarkedNumbers)
+        return unmarkedNumbers.Sum();
+    }
+
+    public List<int> GetUnmarkedNumbers(BingoCard card)
+    {
+        var unmarkedNumbers = new List<int>();
+        foreach(var line in card.numbers)
         {
             foreach (var number in line)
             {
-                sum += number;
+                if (!playedNumbers.Contains(number.Value))
+                {
+                    unmarkedNumbers.Add(number.Value);
+                }
             }
         }
-        return sum;
-    }
-
-    public List<List<int>> GetUnmarkedNumbers(BingoCard card)
-    {
-        return card.numbers.Select(line =>
-        {
-            return line
-                .Where(number => !playedNumbers.Contains(number.Value))
-                .Select(number => number.Value)
-                .ToList();
-        }).ToList();
+        return unmarkedNumbers;
     }
 
     public BingoCard GetWinningBingoCard(List<int> numbers, List<BingoCard> cards)

@@ -1,6 +1,5 @@
 ﻿using DayFour;
 using FluentAssertions;
-using System.ComponentModel.DataAnnotations;
 using Xunit;
 
 namespace Solutions.Test.DayFour;
@@ -39,13 +38,71 @@ public class BingoServiceTests
         var expectedResult = new BingoCard(
             new()
             {
-            new(){ new(1, true), new(6) },
-            new(){ new(2, true), new(7) },
-            new(){ new(3, true), new(8) },
-            new(){ new(4, true), new(9) },
-            new(){ new(5, true), new(10) },
+                new(){ new(1, true), new(6) },
+                new(){ new(2, true), new(7) },
+                new(){ new(3, true), new(8) },
+                new(){ new(4, true), new(9) },
+                new(){ new(5, true), new(10) },
             });
         result.Should().BeEquivalentTo(expectedResult);
         service.playedNumbers.Should().BeEquivalentTo(numbers);
+    }
+
+    [Fact]
+    public void GetUnmarkedNumbers_ShouldReturnCorrectUnmarkedNumbers()
+    {
+        service.playedNumbers = new List<int>() { 1, 3, 4, 5, 9};
+        var bingoCard = new BingoCard(
+            new()
+            {
+                new(){ new(1, true), new(6) },
+                new(){ new(2), new(7) },
+                new(){ new(3, true), new(8) },
+                new(){ new(4, true), new(9, true) },
+                new(){ new(5, true), new(10) },
+            });
+
+        var result = service.GetUnmarkedNumbers(bingoCard);
+
+        var expectedResult = new List<int>() {2, 6, 7, 8, 10 };
+        result.Should().BeEquivalentTo(expectedResult);
+    }
+
+    [Fact]
+    public void GetSumOfUnmarkedNumbers_ShouldReturnCorrectSum()
+    {
+        service.playedNumbers = new List<int>() { 1, 3, 4, 5, 9 };
+        var bingoCard = new BingoCard(
+            new()
+            {
+                new(){ new(1, true), new(6) },
+                new(){ new(2), new(7) },
+                new(){ new(3, true), new(8) },
+                new(){ new(4, true), new(9, true) },
+                new(){ new(5, true), new(10) },
+            });
+
+        var result = service.GetSumOfUnmarkedNumbers(bingoCard);
+
+        result.Should().Be(33);
+    }
+
+    [Fact]
+    public void GetDayFourPartOneSolution_ShouldReturnCorrectSolution()
+    {
+        service.playedNumbers = new List<int>() { 1, 3, 4, 5, 9 };
+        var bingoCard = new BingoCard(
+            new()
+            {
+                new(){ new(1, true), new(6) },
+                new(){ new(2), new(7) },
+                new(){ new(3, true), new(8) },
+                new(){ new(4, true), new(9, true) },
+                new(){ new(5, true), new(10) },
+            });
+
+        var result = service.GetDayFourPartOneSolution(bingoCard);
+
+        result.Should().Be(33 * 9);
     }
 }
