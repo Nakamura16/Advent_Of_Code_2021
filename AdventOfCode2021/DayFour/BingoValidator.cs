@@ -6,14 +6,14 @@ public class BingoValidator
 
     public bool IsWinnerCard(int number, BingoCard card)
     {
-        var bingoCard = card.Numbers;
-        for (int line = 0; line < bingoCard.Count; line++)
+        var cardNumbers = card.Numbers;
+        for (int line = 0; line < cardNumbers.Count; line++)
         {
-            for (int column = 0; column < bingoCard[line].Count; column++)
+            for (int column = 0; column < cardNumbers[line].Count; column++)
             {
-                if (bingoCard[line][column].Value == number)
+                if (cardNumbers[line][column].Value == number)
                 {
-                    bingoCard[line][column].IsChecked = true;
+                    cardNumbers[line][column].IsChecked = true;
                     return IsWinner(card, line, column);
                 }
             }
@@ -23,9 +23,9 @@ public class BingoValidator
 
     public bool IsWinner(BingoCard card, int lastCheckedNumberLine, int lastCheckedNumberColumn)
     {
-        var bingoCard = card.Numbers;
-        return VerifyLine(bingoCard[lastCheckedNumberLine]) 
-            || VerifyColumn(bingoCard, lastCheckedNumberColumn);
+        var cardNumbers = card.Numbers;
+        return VerifyLine(cardNumbers[lastCheckedNumberLine]) 
+            || VerifyColumn(cardNumbers, lastCheckedNumberColumn);
     }
 
     public bool VerifyLine(List<Number> line)

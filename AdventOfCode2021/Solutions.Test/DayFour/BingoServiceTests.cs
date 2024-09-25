@@ -9,29 +9,29 @@ public class BingoServiceTests
     private readonly BingoService service = new();
 
     [Fact]
-    public void VerifyBingoCards_WithOneWinningBingoCard_ShouldReturnWinnerCard()
+    public void VerifyBingoCards_WithWinningCard_ShouldReturnCorrectWinnerCard()
     {
         var numbers = new List<int>() { 1, 2, 3, 4, 5 };
         var bingoCards = new List<BingoCard>()
-    {
-        new(new()
         {
-            new(){ new(0), new(0) },
-            new(){ new(0), new(0) },
-            new(){ new(0), new(0) },
-            new(){ new(0), new(0) },
-            new(){ new(0), new(0) },
-        }),
+            new(new()
+            {
+                new(){ new(0), new(0) },
+                new(){ new(0), new(0) },
+                new(){ new(0), new(0) },
+                new(){ new(0), new(0) },
+                new(){ new(0), new(0) },
+            }),
 
-        new(new()
-        {
-            new(){ new(1), new(6) },
-            new(){ new(2), new(7) },
-            new(){ new(3), new(8) },
-            new(){ new(4), new(9) },
-            new(){ new(5), new(10) },
-        })
-    };
+            new(new()
+            {
+                new(){ new(1), new(6) },
+                new(){ new(2), new(7) },
+                new(){ new(3), new(8) },
+                new(){ new(4), new(9) },
+                new(){ new(5), new(10) },
+            })
+        };
 
         var result = service.GetWinningBingoCard(numbers, bingoCards);
 
@@ -45,13 +45,26 @@ public class BingoServiceTests
                 new(){ new(5, true), new(10) },
             });
         result.Should().BeEquivalentTo(expectedResult);
-        service.playedNumbers.Should().BeEquivalentTo(numbers);
+        service.PlayedNumbers.Should().BeEquivalentTo(numbers);
+    }
+
+    [Fact]
+    public void VerifyBingoCards_WithoutWinningCards_ShouldThrowException()
+    {
+        var numbers = new List<int>() { 1, 2, 3, 4, 5 };
+        var bingoCards = new List<BingoCard>();
+
+        var result = service
+            .Invoking(s => s.GetWinningBingoCard(numbers, bingoCards))
+            .Should()
+            .ThrowExactly<InvalidDataException>()
+            .WithMessage("There is no Winning Cards.");
     }
 
     [Fact]
     public void GetUnmarkedNumbers_ShouldReturnCorrectUnmarkedNumbers()
     {
-        service.playedNumbers = new List<int>() { 1, 3, 4, 5, 9};
+        service.PlayedNumbers = new List<int>() { 1, 3, 4, 5, 9};
         var bingoCard = new BingoCard(
             new()
             {
@@ -69,28 +82,9 @@ public class BingoServiceTests
     }
 
     [Fact]
-    public void GetSumOfUnmarkedNumbers_ShouldReturnCorrectSum()
-    {
-        service.playedNumbers = new List<int>() { 1, 3, 4, 5, 9 };
-        var bingoCard = new BingoCard(
-            new()
-            {
-                new(){ new(1, true), new(6) },
-                new(){ new(2), new(7) },
-                new(){ new(3, true), new(8) },
-                new(){ new(4, true), new(9, true) },
-                new(){ new(5, true), new(10) },
-            });
-
-        var result = service.GetSumOfUnmarkedNumbers(bingoCard);
-
-        result.Should().Be(33);
-    }
-
-    [Fact]
     public void GetDayFourPartOneSolution_ShouldReturnCorrectSolution()
     {
-        service.playedNumbers = new List<int>() { 1, 3, 4, 5, 9 };
+        service.PlayedNumbers = new List<int>() { 1, 3, 4, 5, 9 };
         var bingoCard = new BingoCard(
             new()
             {

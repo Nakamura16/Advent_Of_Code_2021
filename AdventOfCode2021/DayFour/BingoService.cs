@@ -2,19 +2,11 @@
 
 public class BingoService
 {
-    public List<int> playedNumbers = new();
+    public List<int> PlayedNumbers { get; set; } = new ();
 
     public int GetDayFourPartOneSolution(BingoCard card)
     {
-        var lastNumber = playedNumbers.Last() == 0 ? playedNumbers[playedNumbers.Count - 2] : playedNumbers.Last();
-        var sumOfUnmarkedNumbers = GetSumOfUnmarkedNumbers(card);
-        return sumOfUnmarkedNumbers * lastNumber;
-    }
-
-    public int GetSumOfUnmarkedNumbers(BingoCard card)
-    {
-        var unmarkedNumbers = GetUnmarkedNumbers(card);
-        return unmarkedNumbers.Sum();
+        return GetUnmarkedNumbers(card).Sum() * PlayedNumbers.Last();
     }
 
     public List<int> GetUnmarkedNumbers(BingoCard card)
@@ -24,7 +16,7 @@ public class BingoService
         {
             foreach (var number in line)
             {
-                if (!playedNumbers.Contains(number.Value))
+                if (!PlayedNumbers.Contains(number.Value))
                 {
                     unmarkedNumbers.Add(number.Value);
                 }
@@ -36,7 +28,7 @@ public class BingoService
     public BingoCard GetWinningBingoCard(List<int> numbers, List<BingoCard> cards)
     {
         var isWinnerCard = false;
-        BingoCard winnercard = default;
+        BingoCard winnercard = default!;
         var validator = new BingoValidator();
         do
         {
@@ -51,13 +43,18 @@ public class BingoService
                         break;
                     };
                 }
-                playedNumbers.Add(number);
+                PlayedNumbers.Add(number);
+
                 if (isWinnerCard)
                 {
                     break;
                 }
             }
+            break;
         } while (!isWinnerCard);
-        return winnercard;
+
+        return winnercard is null 
+            ? throw new InvalidDataException("There is no Winning Cards.")
+            : winnercard;
     }
 }

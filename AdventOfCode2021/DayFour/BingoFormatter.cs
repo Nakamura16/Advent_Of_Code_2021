@@ -6,6 +6,8 @@ public class BingoFormatter
 
     public List<BingoCard> FormatBingoCards(IList<string> inputFile)
     {
+        RemoveNumbersLine(inputFile);
+
         var bingoCards = new List<BingoCard>();
         var bingoCardNumbers = new List<List<Number>>();
         foreach (var line in inputFile)
@@ -25,5 +27,10 @@ public class BingoFormatter
             }
         }
         return bingoCards;
+    }
+
+    private void RemoveNumbersLine(IList<string> file)
+    {
+        file.RemoveAt(0);
     }
 }

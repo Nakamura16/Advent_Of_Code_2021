@@ -9,6 +9,8 @@ namespace Solutions.Test.DayFour
         private readonly BingoFormatter bingoFormatter = new ();
         private readonly List<string> testData = new()
         {
+            "85,84,30,15,46,71,64,45,13,90,63,89,62,25,87,68,73,47,65,78,2,27,67,95,88,99",
+            "",
             "22 13 17 11  0",
             " 8  2 23  4 24",
             "21  9 14 16  7",
@@ -23,7 +25,7 @@ namespace Solutions.Test.DayFour
         };
 
         [Fact]
-        public void Format_ShouldReturnNumbersAndBingoCards()
+        public void FormatBingoCards_ShouldReturnCorrectBingoCards()
         {
             var result = bingoFormatter.FormatBingoCards(testData);
 
