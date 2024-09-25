@@ -12,7 +12,7 @@ public class BingoFormatter
             {
                 var numbers = line.Split(" ")
                     .Where(number => !string.IsNullOrWhiteSpace(number))
-                    .Select(number => new Number( int.Parse(number)))
+                    .Select(number => new Number(int.Parse(number)))
                     .ToList();
                 bingoCard.Add(numbers);
             }

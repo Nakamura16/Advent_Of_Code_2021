@@ -6,7 +6,9 @@ public class BingoService
 
     public int GetDayFourPartOneSolution(BingoCard card)
     {
-        return GetSumOfUnmarkedNumbers(card) * playedNumbers.Last();
+        var lastNumber = playedNumbers.Last() == 0 ? playedNumbers[playedNumbers.Count - 2] : playedNumbers.Last();
+        var sumOfUnmarkedNumbers = GetSumOfUnmarkedNumbers(card);
+        return sumOfUnmarkedNumbers * lastNumber;
     }
 
     public int GetSumOfUnmarkedNumbers(BingoCard card)
@@ -46,9 +48,14 @@ public class BingoService
                     {
                         isWinnerCard = true;
                         winnercard = card;
+                        break;
                     };
                 }
                 playedNumbers.Add(number);
+                if (isWinnerCard)
+                {
+                    break;
+                }
             }
         } while (!isWinnerCard);
         return winnercard;

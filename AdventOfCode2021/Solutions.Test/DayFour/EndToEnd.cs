@@ -1,15 +1,18 @@
-﻿using FileReader.Application;
+﻿using DayFour;
+using FileReader.Application;
+using FluentAssertions;
+using Xunit;
 
-namespace DayFour;
+namespace Solutions.Test.DayFour;
 
-internal class Program
+public class EndToEnd
 {
-    public static void Main(string[] args)
+    [Fact]
+    public void EndToEndTest()
     {
         var fileReader = new FileReaderTool();
         var bingoFormatter = new BingoFormatter();
-        var filePath = "C:\\Users\\andre\\Desktop\\estudos C#\\Advent_Of_Code_2021\\"
-            + "AdventOfCode2021\\DayFour\\Input.txt";
+        var filePath = "C:\\Users\\andre\\Desktop\\estudos C#\\Advent_Of_Code_2021\\AdventOfCode2021\\Solutions.Test\\DayFour\\testData.txt";
 
         var file = fileReader.ReadFile(filePath).ToList();
         var bingoNumbers = file
@@ -25,6 +28,14 @@ internal class Program
         var winningCard = service.GetWinningBingoCard(bingoNumbers, bingoCards);
         var solution = service.GetDayFourPartOneSolution(winningCard);
 
-        Console.WriteLine($"Solution PartOne: {solution}");
+        var sumOfNonCheckedNumbers = new List<int>()
+        {
+            60, 25, 66, 82, 22,
+            94, 45, 68,  5, 12,
+            46, 44, 48, 31, 34,
+            99, 39, 84, 32,  6,
+        };
+
+        solution.Should().Be(sumOfNonCheckedNumbers.Sum() * 81);
     }
 }
