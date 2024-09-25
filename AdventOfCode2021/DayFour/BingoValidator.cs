@@ -16,6 +16,7 @@ public class BingoValidator
                     {
                         bingoCard.numbers[line][column].IsChecked = true;
                         VerifyLine(bingoCard.numbers[line]);
+                        VerifyColumn(bingoCard.numbers, column);
                     }
                 }
             }
@@ -27,7 +28,7 @@ public class BingoValidator
         return line.Where(item => item.IsChecked).Count() == bingoCardSize;
     }
 
-    public bool VerifyLine(List<List<Number>> card, int columnPosition)
+    public bool VerifyColumn(List<List<Number>> card, int columnPosition)
     {
         var column = new List<Number>();
         foreach (var line in card)
