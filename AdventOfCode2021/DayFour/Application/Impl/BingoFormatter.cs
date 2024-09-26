@@ -8,11 +8,11 @@ public class BingoFormatter : IBingoFormatter
 
     public List<BingoCard> FormatBingoCards(IList<string> inputFile)
     {
-        RemoveNumbersLine(inputFile);
+        var inputFileWithoutNumbersToPlay = RemoveNumbersLine(inputFile);
 
         var bingoCards = new List<BingoCard>();
         var cardNumbers = new List<List<Number>>();
-        foreach (var line in inputFile)
+        foreach (var line in inputFileWithoutNumbersToPlay)
         {
             if (!string.IsNullOrWhiteSpace(line))
             {
@@ -31,12 +31,13 @@ public class BingoFormatter : IBingoFormatter
         return bingoCards;
     }
 
-    private static void RemoveNumbersLine(IList<string> file)
+    private static List<string> RemoveNumbersLine(IList<string> file)
     {
-        file.RemoveAt(0);
+        var newFile = new List<string>(file);
+        newFile.RemoveAt(0);
+        return newFile;
     }
 
-    // TODO: test GetBingoNumbers
     public List<int> GetBingoNumbers(IList<string> file)
     {
         return file

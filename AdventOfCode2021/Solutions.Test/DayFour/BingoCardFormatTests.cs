@@ -51,5 +51,18 @@ namespace Solutions.Test.DayFour
 
             result.Should().BeEquivalentTo(expectedResult);
         }
+
+        [Fact]
+        public void GetBingoNumbers_ShouldReturnAListOfNumbersToPlay()
+        {
+            var result = bingoFormatter.GetBingoNumbers(testData);
+
+            var expectedResult = new List<int>() {
+                85, 84, 30, 15, 46, 71, 64, 45, 13, 90, 63, 89, 62,
+                25, 87, 68, 73, 47, 65, 78, 2, 27, 67, 95, 88, 99
+            };
+
+            result.Should().BeEquivalentTo(expectedResult);
+        }
     }
 }
