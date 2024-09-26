@@ -1,4 +1,7 @@
-﻿using DayFour.Solutions;
+﻿using DayFour.Application.Impl;
+using DayFour.Solutions;
+using DayFour.Validator;
+using DayFour.Validator.Impl;
 using FileReader.Application;
 
 namespace DayFour;
@@ -12,7 +15,10 @@ internal class Program
             + "AdventOfCode2021\\DayFour\\Input.txt";
         var file = fileReader.ReadFile(filePath).ToList();
 
-        var partOneSolution = new PartOneSolution().ExecuteSolution(file);
+        var formatter = new BingoFormatter();
+        var validator = new BingoValidator();
+        var service = new BingoService(validator);
+        var partOneSolution = new PartOneSolution(formatter, service).ExecuteSolution(file);
         Console.WriteLine($"Solution PartOne: {partOneSolution}");
     }
 }

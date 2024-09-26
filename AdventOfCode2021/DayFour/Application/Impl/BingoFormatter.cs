@@ -1,8 +1,8 @@
 ﻿using DayFour.Model;
 
-namespace DayFour.Application;
+namespace DayFour.Application.Impl;
 
-public class BingoFormatter
+public class BingoFormatter : IBingoFormatter
 {
     private const int BingoCardSize = 5;
 
@@ -11,7 +11,7 @@ public class BingoFormatter
         RemoveNumbersLine(inputFile);
 
         var bingoCards = new List<BingoCard>();
-        var bingoCardNumbers = new List<List<Number>>();
+        var cardNumbers = new List<List<Number>>();
         foreach (var line in inputFile)
         {
             if (!string.IsNullOrWhiteSpace(line))
@@ -20,18 +20,18 @@ public class BingoFormatter
                     .Where(number => !string.IsNullOrWhiteSpace(number))
                     .Select(number => new Number(int.Parse(number)))
                     .ToList();
-                bingoCardNumbers.Add(numbers);
+                cardNumbers.Add(numbers);
             }
-            if (bingoCardNumbers.Count == BingoCardSize)
+            if (cardNumbers.Count == BingoCardSize)
             {
-                bingoCards.Add(new BingoCard(new(bingoCardNumbers)));
-                bingoCardNumbers.Clear();
+                bingoCards.Add(new BingoCard(new(cardNumbers)));
+                cardNumbers.Clear();
             }
         }
         return bingoCards;
     }
 
-    private void RemoveNumbersLine(IList<string> file)
+    private static void RemoveNumbersLine(IList<string> file)
     {
         file.RemoveAt(0);
     }

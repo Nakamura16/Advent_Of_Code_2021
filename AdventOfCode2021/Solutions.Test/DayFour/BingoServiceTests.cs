@@ -1,5 +1,6 @@
-﻿using DayFour.Application;
+﻿using DayFour.Application.Impl;
 using DayFour.Model;
+using DayFour.Validator.Impl;
 using FluentAssertions;
 using Xunit;
 
@@ -7,7 +8,7 @@ namespace Solutions.Test.DayFour;
 
 public class BingoServiceTests
 {
-    private readonly BingoService service = new();
+    private readonly BingoService service = new(new BingoValidator());
 
     [Fact]
     public void VerifyBingoCards_WithWinningCard_ShouldReturnCorrectWinnerCard()
@@ -99,5 +100,45 @@ public class BingoServiceTests
         var result = service.GetDayFourPartOneSolution(bingoCard);
 
         result.Should().Be(33 * 9);
+    }
+
+    [Fact]
+    public void GetLastWinningBingoCard_ShouldReturnCorrectLastWinnerCard()
+    {
+        var numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        var bingoCards = new List<BingoCard>()
+        {
+            new(new()
+            {
+                new(){ new(6), new(0) },
+                new(){ new(7), new(0) },
+                new(){ new(8), new(0) },
+                new(){ new(9), new(0) },
+                new(){ new(10), new(0) },
+            }),
+
+            new(new()
+            {
+                new(){ new(1), new(0) },
+                new(){ new(2), new(0) },
+                new(){ new(3), new(0) },
+                new(){ new(4), new(0) },
+                new(){ new(5), new(0) },
+            })
+        };
+
+        var result = service.GetWinningBingoCard(numbers, bingoCards);
+
+        var expectedResult = new BingoCard(
+            new()
+            {
+                new(){ new(6, true), new(0) },
+                new(){ new(7, true), new(0) },
+                new(){ new(8, true), new(0) },
+                new(){ new(9, true), new(0) },
+                new(){ new(10, true), new(0) },
+            });
+        result.Should().BeEquivalentTo(expectedResult);
+        service.PlayedNumbers.Should().BeEquivalentTo(numbers);
     }
 }

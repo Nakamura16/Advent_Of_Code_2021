@@ -1,4 +1,6 @@
-﻿using DayFour.Solutions;
+﻿using DayFour.Application.Impl;
+using DayFour.Solutions;
+using DayFour.Validator.Impl;
 using FileReader.Application;
 using FluentAssertions;
 using Xunit;
@@ -15,7 +17,10 @@ public class EndToEnd
             + "Advent_Of_Code_2021\\AdventOfCode2021\\Solutions.Test\\DayFour\\testData.txt";
         var file = fileReader.ReadFile(filePath).ToList();
 
-        var result = new PartOneSolution().ExecuteSolution(file);
+        var formatter = new BingoFormatter();
+        var validator = new BingoValidator();
+        var service = new BingoService(validator);
+        var result = new PartOneSolution(formatter, service).ExecuteSolution(file);
 
         var sumOfNonCheckedNumbers = new List<int>()
         {

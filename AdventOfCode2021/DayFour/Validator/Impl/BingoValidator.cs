@@ -1,8 +1,8 @@
 ﻿using DayFour.Model;
 
-namespace DayFour.Validator;
+namespace DayFour.Validator.Impl;
 
-public class BingoValidator
+public class BingoValidator : IBingoValidator
 {
     private const int bingoCardSize = 5;
 
@@ -30,7 +30,7 @@ public class BingoValidator
             || VerifyColumn(cardNumbers, lastCheckedNumberColumn);
     }
 
-    public bool VerifyLine(List<Number> line)
+    public bool VerifyLine(IList<Number> line)
     {
         return line.Where(item => item.IsChecked).Count() == bingoCardSize;
     }
@@ -46,5 +46,10 @@ public class BingoValidator
             }
         }
         return column.Count == bingoCardSize;
+    }
+
+    public bool IsWinnerCardValid(BingoCard winnercard)
+    {
+        return winnercard is not null;
     }
 }

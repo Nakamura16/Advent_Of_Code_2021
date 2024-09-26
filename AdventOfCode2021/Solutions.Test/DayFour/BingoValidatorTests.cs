@@ -1,7 +1,7 @@
 ﻿using Xunit;
 using FluentAssertions;
 using DayFour.Model;
-using DayFour.Validator;
+using DayFour.Validator.Impl;
 
 namespace Solutions.Test.DayFour;
 
