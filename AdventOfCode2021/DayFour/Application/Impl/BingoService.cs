@@ -15,7 +15,7 @@ public class BingoService : IBingoService
         validator = bingoValidator;
     }
 
-    public int GetDayFourPartOneSolution(BingoCard card)
+    public int GetProductOfTheSumOfUnmarkedNumbersAndTheLastPlayedNumber(BingoCard card)
     {
         return GetUnmarkedNumbers(card).Sum() * PlayedNumbers.Last();
     }
@@ -71,33 +71,25 @@ public class BingoService : IBingoService
     public BingoCard GetLastWinningBingoCard(IList<int> numbers, IList<BingoCard> cards)
     {
         var winningCards = new List<BingoCard>();
-        do
+        while (winningCards.Count < cards.Count)
         {
             foreach (var number in numbers)
             {
                 foreach (var card in cards)
                 {
-                    if (validator.IsWinnerCard(number, card))
+                    if (!winningCards.Contains(card) && validator.IsWinnerCard(number, card))
                     {
                         winningCards.Add(card);
-                        break;
                     };
                 }
                 PlayedNumbers.Add(number);
 
-                if (winningCards.Count != cards.Count)
+                if (winningCards.Count == cards.Count)
                 {
                     break;
                 }
             }
-            break;
-        } while (winningCards.Count != cards.Count);
-
+        }
         return winningCards.Last();
-    }
-
-    IList<int> IBingoService.GetUnmarkedNumbers(BingoCard card)
-    {
-        throw new NotImplementedException();
     }
 }

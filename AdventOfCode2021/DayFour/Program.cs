@@ -18,7 +18,11 @@ internal class Program
         var formatter = new BingoFormatter();
         var validator = new BingoValidator();
         var service = new BingoService(validator);
+
         var partOneSolution = new PartOneSolution(formatter, service).ExecuteSolution(file);
         Console.WriteLine($"Solution PartOne: {partOneSolution}");
+
+        var partTwoSolution = new PartTwoSolution(formatter, service).ExecuteSolution(file);
+        Console.WriteLine($"Solution PartTwo: {partTwoSolution}");
     }
 }

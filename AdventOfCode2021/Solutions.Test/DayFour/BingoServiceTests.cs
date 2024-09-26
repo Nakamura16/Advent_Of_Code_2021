@@ -97,7 +97,7 @@ public class BingoServiceTests
                 new(){ new(5, true), new(10) },
             });
 
-        var result = service.GetDayFourPartOneSolution(bingoCard);
+        var result = service.GetProductOfTheSumOfUnmarkedNumbersAndTheLastPlayedNumber(bingoCard);
 
         result.Should().Be(33 * 9);
     }
@@ -105,7 +105,7 @@ public class BingoServiceTests
     [Fact]
     public void GetLastWinningBingoCard_ShouldReturnCorrectLastWinnerCard()
     {
-        var numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        var numbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12};
         var bingoCards = new List<BingoCard>()
         {
             new(new()
@@ -127,7 +127,7 @@ public class BingoServiceTests
             })
         };
 
-        var result = service.GetWinningBingoCard(numbers, bingoCards);
+        var result = service.GetLastWinningBingoCard(numbers, bingoCards);
 
         var expectedResult = new BingoCard(
             new()
@@ -139,6 +139,48 @@ public class BingoServiceTests
                 new(){ new(10, true), new(0) },
             });
         result.Should().BeEquivalentTo(expectedResult);
-        service.PlayedNumbers.Should().BeEquivalentTo(numbers);
+        var expectedPlayedNumbers = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        service.PlayedNumbers.Should().BeEquivalentTo(expectedPlayedNumbers);
+    }
+
+    [Fact]
+    public void GetLastWinningBingoCard_WithMixedNumbers_ShouldReturnCorrectLastWinnerCard()
+    {
+        var numbers = new List<int>() {  4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3, };
+        var bingoCards = new List<BingoCard>()
+        {
+            new(new()
+            {
+                new(){ new(6), new(0) },
+                new(){ new(7), new(0) },
+                new(){ new(8), new(0) },
+                new(){ new(9), new(0) },
+                new(){ new(10), new(0) },
+            }),
+
+            new(new()
+            {
+                new(){ new(1), new(0) },
+                new(){ new(2), new(0) },
+                new(){ new(3), new(0) },
+                new(){ new(4), new(0) },
+                new(){ new(5), new(0) },
+            })
+        };
+
+        var result = service.GetLastWinningBingoCard(numbers, bingoCards);
+
+        var expectedResult = new BingoCard(
+            new()
+            {
+                new(){ new(1, true), new(0) },
+                new(){ new(2, true), new(0) },
+                new(){ new(3, true), new(0) },
+                new(){ new(4, true), new(0) },
+                new(){ new(5, true), new(0) },
+            });
+        result.Should().BeEquivalentTo(expectedResult);
+        var expectedPlayedNumbers = new List<int>() {4, 5, 6, 7, 8, 9, 10, 11, 12, 1, 2, 3};
+        service.PlayedNumbers.Should().BeEquivalentTo(expectedPlayedNumbers);
     }
 }

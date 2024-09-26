@@ -6,8 +6,8 @@ public interface IBingoService
 {
     IList<int> PlayedNumbers { get; set; }
 
-    int GetDayFourPartOneSolution(BingoCard card);
+    int GetProductOfTheSumOfUnmarkedNumbersAndTheLastPlayedNumber(BingoCard card);
     BingoCard GetLastWinningBingoCard(IList<int> numbers, IList<BingoCard> cards);
-    IList<int> GetUnmarkedNumbers(BingoCard card);
+    List<int> GetUnmarkedNumbers(BingoCard card);
     BingoCard GetWinningBingoCard(IList<int> numbers, IList<BingoCard> cards);
 }

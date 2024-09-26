@@ -5,7 +5,7 @@ namespace DayFour.Solutions;
 
 public class PartOneSolution
 {
-    // SOLID - Dpendency Inversion
+    // SOLID - Dependency Inversion
     // "Depend on abstractions"
     private readonly IBingoFormatter formatter;
     private readonly IBingoService service;
@@ -18,20 +18,11 @@ public class PartOneSolution
 
     public int ExecuteSolution(IList<string> file)
     {
-        List<int> bingoNumbers = GetBingoNumbers(file);
+        List<int> bingoNumbers = formatter.GetBingoNumbers(file);
 
         var bingoCards = formatter.FormatBingoCards(file);
 
         var winningCard = service.GetWinningBingoCard(bingoNumbers, bingoCards);
-        return service.GetDayFourPartOneSolution(winningCard);
-    }
-
-    private List<int> GetBingoNumbers(IList<string> file)
-    {
-        return file
-            .Single(line => line.Length > 15)
-            .Split(",")
-            .Select(number => int.Parse(number))
-            .ToList();
+        return service.GetProductOfTheSumOfUnmarkedNumbersAndTheLastPlayedNumber(winningCard);
     }
 }

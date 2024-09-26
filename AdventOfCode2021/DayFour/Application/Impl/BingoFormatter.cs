@@ -35,4 +35,14 @@ public class BingoFormatter : IBingoFormatter
     {
         file.RemoveAt(0);
     }
+
+    // TODO: test GetBingoNumbers
+    public List<int> GetBingoNumbers(IList<string> file)
+    {
+        return file
+            .Single(line => line.Length > 15)
+            .Split(",")
+            .Select(number => int.Parse(number))
+            .ToList();
+    }
 }
