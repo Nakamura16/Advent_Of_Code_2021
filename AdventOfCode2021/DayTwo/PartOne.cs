@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace DayTwo;
 
-namespace DayTwo;
-
-internal class PartOne
+public class PartOne
 {
     public int Calculate(IReadOnlyList<(string direction,int steps)> instructions)
     {

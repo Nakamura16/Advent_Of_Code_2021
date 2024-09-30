@@ -1,6 +1,6 @@
 ﻿namespace DayOne;
 
-internal class PartOneSolution
+public class PartOneSolution
 {
     public int Run(IReadOnlyList<int> depthMeasurements)
     {
