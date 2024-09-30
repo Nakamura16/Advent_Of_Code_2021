@@ -11,11 +11,6 @@ public class PartOneSolution
             var isLineSegmentHorizontal = lineSegment.Start.PositionX == lineSegment.End.PositionX;
             var isLineSegmentVertical = lineSegment.Start.PositionY == lineSegment.End.PositionY;
 
-            if (!isLineSegmentHorizontal && !isLineSegmentVertical)
-            {
-                return;
-            }
-
             if (isLineSegmentHorizontal)
             {
                 var startColumn = Math.Min(lineSegment.Start.PositionY, lineSegment.End.PositionY);
@@ -35,5 +30,21 @@ public class PartOneSolution
                 }
             }
         }
+    }
+
+    public int VerifyResult(List<List<int>> map)
+    {
+        var count = 0;
+        foreach (var line in map)
+        {
+            foreach (var item in line)
+            {
+                if (item > 1)
+                {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 }
