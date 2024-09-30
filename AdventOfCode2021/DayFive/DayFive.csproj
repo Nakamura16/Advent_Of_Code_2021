@@ -11,8 +11,4 @@
     <ProjectReference Include="..\FileReader\FileReader.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Solutions\" />
-  </ItemGroup>
-
 </Project>

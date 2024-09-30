@@ -12,8 +12,8 @@ public class LineSegmentConverter
             var endCordinate = cordinates[1].Split(",");
 
             return new LineSegment(
-                Start: new Cordinate(int.Parse(startCordinate[0]), int.Parse(startCordinate[1])),
-                End: new Cordinate(int.Parse(endCordinate[0]), int.Parse(endCordinate[1])));
+                Start: new Coordinate(int.Parse(startCordinate[0]), int.Parse(startCordinate[1])),
+                End: new Coordinate(int.Parse(endCordinate[0]), int.Parse(endCordinate[1])));
         }).ToList();
     }
 }

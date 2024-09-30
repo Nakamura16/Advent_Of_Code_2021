@@ -1,3 +1,3 @@
 ﻿namespace DayFive.Model;
 
-public record LineSegment(Cordinate Start, Cordinate End);
+public record LineSegment(Coordinate Start, Coordinate End);
