@@ -24,10 +24,10 @@ public class LineSegmentConverterTests
 
         var expectedResult = new List<LineSegment>()
         {
-            new(new("0","9"), new("5","9")),
-            new(new("8","0"), new("0","8")),
-            new(new("9","4"), new("3","4")),
-            new(new("2","2"), new("2","1"))
+            new(new(0,9), new(5,9)),
+            new(new(8,0), new(0,8)),
+            new(new(9,4), new(3,4)),
+            new(new(2,2), new(2,1))
         };
         result.Should().BeEquivalentTo(expectedResult);
     }
