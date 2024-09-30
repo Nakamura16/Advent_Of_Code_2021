@@ -1,5 +1,5 @@
 ﻿using DayFive.Model;
-namespace DayFive;
+namespace DayFive.Converter;
 
 public class LineSegmentConverter
 {

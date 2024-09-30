@@ -10,7 +10,7 @@ public class PartOneSolutionTests
     private readonly PartOneSolution solution = new();
 
     [Fact] 
-    public void FillLineSegments_WithHorizontalLineSegment_ShoulFillMapCorrectly()
+    public void MarkAllLineSegments_WithHorizontalLineSegment_ShoulFillMapCorrectly()
     {
         var map = new List<List<int>>()
         {
@@ -23,7 +23,7 @@ public class PartOneSolutionTests
 
         var lineSegments = new List<LineSegment>() { new(new(2,1), new(2, 3)) };
 
-        solution.FillLineSegments(lineSegments, map);
+        solution.MarkAllLineSegments(lineSegments, map);
 
         var expectedMap = new List<List<int>>()
         {
@@ -37,7 +37,7 @@ public class PartOneSolutionTests
     }
 
     [Fact]
-    public void FillLineSegments_WithVerticalLineSegment_ShoulFillMapCorrectly()
+    public void MarkAllLineSegments_WithVerticalLineSegment_ShoulFillMapCorrectly()
     {
         var map = new List<List<int>>()
         {
@@ -50,7 +50,7 @@ public class PartOneSolutionTests
 
         var lineSegments = new List<LineSegment>() { new(new(1, 2), new(3, 2)) };
 
-        solution.FillLineSegments(lineSegments, map);
+        solution.MarkAllLineSegments(lineSegments, map);
 
         var expectedMap = new List<List<int>>()
         {
@@ -58,6 +58,33 @@ public class PartOneSolutionTests
             new(){ 0, 0, 1, 0, 0},
             new(){ 0, 0, 1, 0, 0},
             new(){ 0, 0, 1, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
+        };
+        map.Should().BeEquivalentTo(expectedMap);
+    }
+
+    [Fact]
+    public void MarkAllLineSegments_DiagonalLineSegment_ShouldIgnoreAndNotMark()
+    {
+        var map = new List<List<int>>()
+        {
+            new(){ 0, 0, 0, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
+        };
+
+        var lineSegments = new List<LineSegment>() { new(new(1, 1), new(3, 3)) };
+
+        solution.MarkAllLineSegments(lineSegments, map);
+
+        var expectedMap = new List<List<int>>()
+        {
+            new(){ 0, 0, 0, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
+            new(){ 0, 0, 0, 0, 0},
             new(){ 0, 0, 0, 0, 0},
         };
         map.Should().BeEquivalentTo(expectedMap);

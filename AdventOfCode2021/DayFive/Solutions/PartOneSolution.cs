@@ -4,7 +4,7 @@ namespace DayFive.Solutions;
 
 public class PartOneSolution
 {
-    public void FillLineSegments(List<LineSegment> segmentsCoordinates, List<List<int>> map)
+    public void MarkAllLineSegments(List<LineSegment> segmentsCoordinates, List<List<int>> map)
     {
         foreach (var lineSegment in segmentsCoordinates)
         {
@@ -13,21 +13,11 @@ public class PartOneSolution
 
             if (isLineSegmentHorizontal)
             {
-                var startColumn = Math.Min(lineSegment.Start.PositionY, lineSegment.End.PositionY);
-                var endColumn = Math.Max(lineSegment.Start.PositionY, lineSegment.End.PositionY);
-                for (var actualColumn = startColumn; actualColumn <= endColumn; actualColumn++)
-                {
-                    map[lineSegment.Start.PositionX][actualColumn]++;
-                }
+                MarkHorizontalLineSegment(map, lineSegment);
             }
             else if (isLineSegmentVertical)
             {
-                var startLine = Math.Min(lineSegment.Start.PositionX, lineSegment.End.PositionX);
-                var endLine = Math.Max(lineSegment.Start.PositionX, lineSegment.End.PositionX);
-                for (var actualLine = startLine; actualLine <= endLine; actualLine++)
-                {
-                    map[actualLine][lineSegment.Start.PositionY]++;
-                }
+                MarkVerticalLineSegment(map, lineSegment);
             }
         }
     }
@@ -46,5 +36,25 @@ public class PartOneSolution
             }
         }
         return count;
+    }
+
+    private void MarkVerticalLineSegment(List<List<int>> map, LineSegment lineSegment)
+    {
+        var startLine = Math.Min(lineSegment.Start.PositionX, lineSegment.End.PositionX);
+        var endLine = Math.Max(lineSegment.Start.PositionX, lineSegment.End.PositionX);
+        for (var actualLine = startLine; actualLine <= endLine; actualLine++)
+        {
+            map[actualLine][lineSegment.Start.PositionY]++;
+        }
+    }
+
+    private void MarkHorizontalLineSegment(List<List<int>> map, LineSegment lineSegment)
+    {
+        var startColumn = Math.Min(lineSegment.Start.PositionY, lineSegment.End.PositionY);
+        var endColumn = Math.Max(lineSegment.Start.PositionY, lineSegment.End.PositionY);
+        for (var actualColumn = startColumn; actualColumn <= endColumn; actualColumn++)
+        {
+            map[lineSegment.Start.PositionX][actualColumn]++;
+        }
     }
 }
