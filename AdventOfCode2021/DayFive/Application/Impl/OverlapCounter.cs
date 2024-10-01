@@ -1,6 +1,8 @@
-﻿namespace DayFive.Solutions;
+﻿using DayFive.Application;
 
-public class OverlapCounter
+namespace DayFive.Application.Impl;
+
+public class OverlapCounter : IOverlapCounter
 {
     public int CountMoreThanTwoOverlaps(List<List<int>> map)
     {

@@ -1,7 +1,8 @@
-﻿using DayFive.Model;
+﻿using DayFive.Converter.Impl;
+using DayFive.Model;
 namespace DayFive.Converter;
 
-public class LineSegmentConverter
+public class LineSegmentConverter : ILineSegmentConverter
 {
     public List<LineSegment> Convert(IList<string> inputLines)
     {

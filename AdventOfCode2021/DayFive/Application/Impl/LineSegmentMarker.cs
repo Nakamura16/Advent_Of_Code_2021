@@ -1,8 +1,8 @@
 ﻿using DayFive.Model;
 
-namespace DayFive.Application;
+namespace DayFive.Application.Impl;
 
-public class LineSegmentMarker
+public class LineSegmentMarker : ILineSegmentMarker
 {
     public void MarkHorizontalAndVerticalLineSegments(List<LineSegment> segmentsCoordinates, List<List<int>> map)
     {
@@ -22,6 +22,7 @@ public class LineSegmentMarker
         }
     }
 
+    // TODO: Add tests
     public void MarkAllLineSegments(List<LineSegment> segmentsCoordinates, List<List<int>> map)
     {
         foreach (var lineSegment in segmentsCoordinates)
@@ -49,8 +50,9 @@ public class LineSegmentMarker
         lineSegment.Direction = GetDiagonalDirection(lineSegment);
         var currentPoint = new Coordinate(lineSegment.Start.PositionX, lineSegment.Start.PositionY);
 
-        while (!currentPoint.Equals(lineSegment.End)) 
+        while (!currentPoint.Equals(lineSegment.End))
         {
+            // TODO: try to not use switch case
             switch (lineSegment.Direction)
             {
                 case DiagonalDirections.UpRight:
@@ -82,6 +84,7 @@ public class LineSegmentMarker
         }
     }
 
+    // This method is a mess, how can I imporve this
     public DiagonalDirections GetDiagonalDirection(LineSegment lineSegment)
     {
         var isDiagonalUpRight = lineSegment.End.PositionX < lineSegment.Start.PositionX
@@ -101,11 +104,11 @@ public class LineSegmentMarker
         {
             return DiagonalDirections.UpLeft;
         }
-        else if(isDiagonalDownRight)
+        else if (isDiagonalDownRight)
         {
             return DiagonalDirections.DownRight;
         }
-        else if(isDiagonalDownLeft)
+        else if (isDiagonalDownLeft)
         {
             return DiagonalDirections.DownLeft;
         }
@@ -113,6 +116,7 @@ public class LineSegmentMarker
         throw new ArgumentException("There is no valid Direction.");
     }
 
+    // Add tests for both of this private methods
     private void MarkVerticalLineSegment(List<List<int>> map, LineSegment lineSegment)
     {
         var startLine = Math.Min(lineSegment.Start.PositionX, lineSegment.End.PositionX);

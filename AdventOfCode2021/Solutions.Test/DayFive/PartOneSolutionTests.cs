@@ -1,5 +1,5 @@
-﻿using DayFive.Model;
-using DayFive.Solutions;
+﻿using DayFive.Application.Impl;
+using DayFive.Model;
 using FluentAssertions;
 using Xunit;
 
