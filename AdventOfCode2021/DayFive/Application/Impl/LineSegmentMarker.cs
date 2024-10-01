@@ -47,7 +47,7 @@ public class LineSegmentMarker : ILineSegmentMarker
 
     public void MarkDiagonalLineSegment(List<List<int>> map, LineSegment lineSegment)
     {
-        lineSegment.Direction = GetDiagonalDirection(lineSegment);
+        lineSegment.Direction = GetLineSegmentPosition(lineSegment);
         var currentPoint = new Coordinate(lineSegment.Start.PositionX, lineSegment.Start.PositionY);
 
         while (!currentPoint.Equals(lineSegment.End))
@@ -84,36 +84,39 @@ public class LineSegmentMarker : ILineSegmentMarker
         }
     }
 
-    // This method is a mess, how can I imporve this
-    public DiagonalDirections GetDiagonalDirection(LineSegment lineSegment)
+    // This method is a mess, how can I imporve this?
+    public DiagonalDirections GetLineSegmentPosition(LineSegment lineSegment)
     {
-        var isDiagonalUpRight = lineSegment.End.PositionX < lineSegment.Start.PositionX
-            && lineSegment.End.PositionY > lineSegment.Start.PositionY;
-        var isDiagonalDownRight = lineSegment.End.PositionX > lineSegment.Start.PositionX
-            && lineSegment.End.PositionY > lineSegment.Start.PositionY;
-        var isDiagonalDownLeft = lineSegment.End.PositionX > lineSegment.Start.PositionX
-            && lineSegment.End.PositionY < lineSegment.Start.PositionY;
-        var isDiagonalUpLeft = lineSegment.End.PositionX < lineSegment.Start.PositionX
-            && lineSegment.End.PositionY < lineSegment.Start.PositionY;
+        var isLineSegmentHorizontal = lineSegment.Start.PositionX == lineSegment.End.PositionX;
+        var isLineSegmentVertical = lineSegment.Start.PositionY == lineSegment.End.PositionY;
+        var isFinalPositionXBiggerThanStart = lineSegment.End.PositionX > lineSegment.Start.PositionX;
+        var isFinalPositionYBiggerThanStart = lineSegment.End.PositionY > lineSegment.Start.PositionY;
 
-        if (isDiagonalUpRight)
+        if (isLineSegmentHorizontal)
+        {
+            return DiagonalDirections.Horizontal;
+        }
+        else if (isLineSegmentVertical) 
+        {
+            return DiagonalDirections.Vertical;
+        }
+        else if (!isFinalPositionXBiggerThanStart && isFinalPositionYBiggerThanStart)
         {
             return DiagonalDirections.UpRight;
         }
-        else if (isDiagonalUpLeft)
+        else if (!isFinalPositionXBiggerThanStart && !isFinalPositionYBiggerThanStart)
         {
             return DiagonalDirections.UpLeft;
         }
-        else if (isDiagonalDownRight)
+        else if (isFinalPositionXBiggerThanStart && isFinalPositionYBiggerThanStart)
         {
             return DiagonalDirections.DownRight;
         }
-        else if (isDiagonalDownLeft)
+        else if (isFinalPositionXBiggerThanStart && !isFinalPositionYBiggerThanStart)
         {
             return DiagonalDirections.DownLeft;
         }
-
-        throw new ArgumentException("There is no valid Direction.");
+        return default;
     }
 
     // Add tests for both of this private methods

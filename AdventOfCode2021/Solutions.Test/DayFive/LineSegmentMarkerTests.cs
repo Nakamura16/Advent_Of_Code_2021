@@ -98,7 +98,7 @@ public class LineSegmentMarkerTests
     {
         var lineSegment = new LineSegment(start, end);
 
-        var result = marker.GetDiagonalDirection(lineSegment);
+        var result = marker.GetLineSegmentPosition(lineSegment);
 
         result.Should().Be(direction);
     }
@@ -112,17 +112,6 @@ public class LineSegmentMarkerTests
             { new(2, 1), new(1, 2), DiagonalDirections.UpRight},
             { new(2, 2), new(1, 1), DiagonalDirections.UpLeft},
         };
-    }
-
-    [Fact]
-    public void GetDiagonalDirection_InvalidDiagonalSegment_ShouldThrowArgumentException()
-    {
-        var lineSegment = new LineSegment(new(2, 2), new(2, 2));
-
-        marker.Invoking(m => m.GetDiagonalDirection(lineSegment))
-            .Should()
-            .ThrowExactly<ArgumentException>()
-            .WithMessage("There is no valid Direction.");
     }
 
     [Fact]

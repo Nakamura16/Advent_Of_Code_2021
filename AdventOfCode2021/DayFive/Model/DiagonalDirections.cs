@@ -5,5 +5,7 @@ public enum DiagonalDirections
     UpRight,
     UpLeft,
     DownRight,
-    DownLeft
+    DownLeft,
+    Horizontal,
+    Vertical,
 }
