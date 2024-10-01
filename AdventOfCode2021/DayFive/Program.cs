@@ -1,8 +1,8 @@
-﻿using DayFive.Converter;
+﻿using DayFive.Application;
+using DayFive.Converter;
 using DayFive.Helper;
 using DayFive.Solutions;
 using FileReader.Application;
-using System.Runtime.CompilerServices;
 
 namespace DayFive;
 
@@ -18,13 +18,20 @@ public class Program
         var file = fileReader.ReadFile(filePath).ToList();
 
         var converter = new LineSegmentConverter();
-        var partOne = new PartOneSolution();
+        var lineSegmentMarker = new LineSegmentMarker();
+        var overlapCounter = new OverlapCounter();
 
         var lineSegments = converter.Convert(file);
         var map = MatrixCreator.CreateMatrix(matrixSize);
-        partOne.MarkAllLineSegments(lineSegments, map);
+        lineSegmentMarker.MarkHorizontalAndVerticalLineSegments(lineSegments, map);
 
-        var partOneResult = partOne.VerifyResult(map);
+        var partOneResult = overlapCounter.CountMoreThanTwoOverlaps(map);
         Console.WriteLine($"Solution for PartOne: {partOneResult}");
+
+        var mapPartTwo = MatrixCreator.CreateMatrix(matrixSize);
+        lineSegmentMarker.MarkAllLineSegments(lineSegments, mapPartTwo);
+
+        var partTwoResult = overlapCounter.CountMoreThanTwoOverlaps(mapPartTwo);
+        Console.WriteLine($"Solution for PartTwo: {partTwoResult}");
     }
 }
