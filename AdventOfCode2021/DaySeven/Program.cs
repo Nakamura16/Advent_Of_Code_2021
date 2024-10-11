@@ -10,5 +10,6 @@ public class Program
         var file = new FileReaderTool().ReadFile(filePath).ToList();
 
         Console.WriteLine($"PartOne Solution: {new PartOneSolution(new InputConverter()).GetSolution(file)}");
+        Console.WriteLine($"PartTwo Solution: {new PartTwoSolution(new InputConverter()).GetSolution(file)}");
     }
 }
